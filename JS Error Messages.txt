@@ -1,0 +1,33 @@
+JavaScript Error Messages
+
+
+
+It is important to get into the habit of reading and inspecting error messages. Error messages can be cryptic and at times as useful as a screen door in a submarine, but they are also the clues and puzzle pieces you need to solve a bug in your code.
+
+Let's take a look at the canYouFindTheError variable:
+
+const canYouFindTheError = 'what is the error';
+canYouFindTheError();
+Copy and paste the code into the chrome console. Open the chrome console with cmd + option + j on Mac or ctrl+ option + j on PC. Paste the code into the console and press enter.
+
+When canYouFindTheError is executed in the chrome console, an error message is thrown.
+
+
+
+Uncaught TypeError: canYouFindTheError is not a function
+
+Uncaught TypeError: The first part of the error indicates we have a type error. Other types of errors you will commonly see are RangeError and SyntaxError. The first part of the error isn't that intuitive but it primes your train of thought to focus on specific parts of your code.
+
+canYouFindTheError is not a function: The second portion of an error tries its best in describing an error. In this case, the error can be taken literally, canYouFindTheError isn't a function but we are invoking it with a set of parenthesis which is an action we can only perform with functions.
+
+You may have noticed that the error has a link associated with it on the right hand side of the error where the blue arrow points to. VM344:2, the VM344 (note: VM266 may be different in your browser) isn't important to us, but the:2indicates the line number of the error. Furthermore, clicking on the error shows you the code executed and adds a red line undercanYouFindTheError`.
+
+
+
+You will see the notation LINE:COLUMN often in the chrome dev tools and other debugging tools. The debugging tools make their best effort in finding the location of your error (but they can also be misleading). Here is an example of the LINE:COLUMN syntax:
+
+
+
+Take note of the updated expression executed " " + canYouFindTheError(). canYouFindTheError is invoked on the 7th index of the Line, most debugging tools use the terminology "column". Knowing the line and column of your error is helpful when analyzing your error, keep this in mind when you read errors in the console.
+
+When your code isn't functioning properly, one of your first instincts should be to open your chrome console and see if an error message (or multiple messages) is thrown.

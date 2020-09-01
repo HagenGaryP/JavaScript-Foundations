@@ -1,0 +1,79 @@
+Execution Context - EC
+
+
+An execution context is a record of information when code is executed. 
+
+Whether your entire program is running, or individual functions inside of your program are invoked, 
+execution contexts are created.
+
+
+
+Here is the information stored and created in an Execution Context:
+
+    * HOW the function is invoked (as a method?)
+
+    * A Lexical Environment
+
+    * The context of the this keyword ...and more!
+
+
+
+Let's take a look at the two primary types of execution contexts:
+
+    * Global Execution Context
+
+    * Function Execution Context
+
+
+
+Global Execution Context:
+The base execution context of a program is the Global Execution Context 
+    (remember, the execution context is a record of information). 
+    An execution context is like a box or wrapper of information needed to execute code. 
+
+
+The Global Execution Context creates the following:
+
+    * The Global Scope (Global Lexical Environment): 
+
+        - Object Environment Record: Environment Variables.  Functions and 'var' declarations.
+
+        - Declarative Environment Record: 'let' and 'var' declarations (** this might be a typo **)
+
+    
+    * The Global Object:
+
+        - The global object has a unique identifier based on the runtime:
+                - Node.js - 'global'
+                - Browsers - 'window'
+
+        - Everything stored in the Object Environment Record is attached to the global object.
+
+    
+    * binds the this keyword to the Global Object:
+
+        - The value of 'this' is bound to the global object.
+
+        - default binding rule.
+
+
+
+Function Execution Context:
+
+A Function Execution Context is created whenever a function is invoked. 
+When a function is invoked, the execution context is created which consists of:
+
+    - Lexical Environment (scope and a link to the outer scope)
+    - the context of the 'this' keyword is determined
+
+Function Lexical Environment (Function Scope):
+    - Local Scope - Every declaration within the function is in the function scope.
+    - Scope Chain - Every scope, aka Lexical Environment, has a link to its parent Lex Env.
+
+"this" Context:
+    - The context of 'this' is created when the function is invoked.
+    - Depending on the call-site, the context of this can vary based on how the function is invoked.
+
+
+
+

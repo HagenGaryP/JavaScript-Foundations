@@ -1,0 +1,451 @@
+*********************************************************************************
+
+                The Document Object Model (DOM)
+
+*********************************************************************************
+
+Before accessing the DOM, you must link the JS file to the HTML file by using the <script> tag,
+which is commonly the last line of code in the <body> of the HTML file, just before </body>.
+
+Inside the <script> tag is the "src" attribute, which is set equal to the string of the js file name.
+
+For example, if our JS file was called "dom-example.js" our script tag would look like this:
+
+    <script src='dom-example.js'> </script>
+
+
+
+Once the JS file is linked, we can check if everything is connected properly by typing "alert()" in the JS file.
+
+** SIDE NOTE:  Scott suggests using the VS code extension/plug-in called "Live Server"
+
+
+
+
+*********************************************************************************
+
+                        Selecting DOM elements
+
+*********************************************************************************
+
+SOME POPULAR DOM SELECTORS:
+
+    document.getElementById('name-of-id')
+    document.getElementsByTagName('p')
+    document.getElementsByClassName('my-class')
+    document.querySelector('.myClass')
+
+
+
+
+
+As an example, Scott creates a function in the "dom-example.js" file, to show how to intereact with the DOM.
+
+
+// find a way to select the title HTML element.  Give the HTML element an ID and use JS to select that ID.
+
+In the HTML file: 
+    
+    <h1>This is my Title</h1>               (the original title element)
+
+    <h1 id='title'>This is my Title</h1>    (added "id" attribute to title element)
+
+
+In the JavaScript file (dom-example.js):   ** don't forget to invoke the function to get it to execute **
+
+function getTitle() {
+    let title = document.getElementById('title');  // this will set a variable equal to the HTML element by ID.
+
+    console.log(title.nodeName);        // logs the name of the node it's using --> the html element "H1"
+
+    console.log(title.innerHTML);       // logs the text value of "title" variable -> "This is my Title"
+
+    // can reassign the value of title.innerHTML since it is NOT a "read only" method.
+    title.innerHTML = 'HELLO WORLD';    // now title.innerHTML is "HELLO WORLD"
+
+    // even though we're reassigning the value of the 'title' variable's innerHTML (its text), 
+    //  it doesn't change within the HTML file itself, but we're interacting with the DOM.
+
+    title.id = 'already-changed';
+    console.log(title.innerHTML);       // HELLO WORLD
+    console.log(title);                 // <h1 id="already-changed">HELLO WORLD</h1>
+    
+}
+
+getTitle();  // invoking function to see what it does to the web page
+
+
+
+
+
+**********************************************************************
+
+                            SUMMARY
+
+**********************************************************************                    
+
+Document - the document is just a file, in most cases when talking about the DOM it is an HTML file
+
+Object - every HTML element in the "document" is an object, e.g.:
+
+    everything is an "object" including the <html>, <head>, <body>, elements, etc...
+
+Model - model represents the positioning and layout of the elements on the page. 
+        This is where the family-tree terminology is applied which was introduced in HTML and CSS.
+
+
+
+Can call on the 'document' object using various methods, like the selectors mentioned above.
+
+.getElementById()
+.getElementsByTagName()
+.getElementsByClassName()
+.querySelector()
+
+
+The DOM interaction with the HTML file is done through the JavaScript file, which is linked
+    within the HTML file itself, using <script src='fileName.js'></script> 
+
+Once linked, we can work with the JS file like normal.  
+
+If the HTML tag has an id='title':
+    document.getElementById('title'); // is a way of selecting that element.
+
+Can set things equal to variables to work with them more easily.
+    let title = document.getElementById('title');
+
+    title.innerHTML = 'HELLO WORLD';    // now title.innerHTML is "HELLO WORLD"
+    title.id = 'already-changed';
+    console.log(title.innerHTML);       // HELLO WORLD
+    console.log(title);                 // <h1 id="already-changed">HELLO WORLD</h1>
+
+* don't forget to invoke your functions!
+
+
+
+
+
+*********************************************************************************
+
+                Introduction to Event Listeners
+
+*********************************************************************************
+
+When HTML loads in the browser, it loads top to bottom.
+
+- the <head> element loads first that includes the stylesheets (CSS) for the page
+
+- the <body> element loads, and all of the HTML elements in the <body> are added to the DOM
+
+- at the end of the body, <script> tags load all the javascript files
+
+
+
+Since the <script> element loads only one time, the javascript files execute once. 
+If we have code that is executed in the js file, it only runs once. 
+
+In order to run code based on a user action, such as a button click, keyboard event, etc.
+
+Consider the following (JavaScript) code example:
+
+function updateBackground() {
+    document.querySelector('h1').style.backgroundColor = 'red';
+}
+
+updateBackground();
+
+
+In the above example, the HTML Element's "style" property is used to update the
+background color of the "<h1>" element.
+
+The function "updateBackground" executes when the <script> element loads.
+
+
+
+INTRO TO EVENTS
+
+An event is just an action that happens in your program or on your web page. 
+This allows your program to run a block of code when "some event" happens.
+
+
+Question: If the javascript code runs once, as soon as the page opens,
+    how is it going to get the information out of something like an "input" field
+    and store that value somewhere when the "submit" button is clicked?
+
+We'd need a way of getting code to execute when someone clicks "submit",
+so we need to create an event on the button "submit" with an event handler.
+
+
+
+HOW TO ADD EVENT HANDLERS:
+
+
+
+***********************************
+
+"EventTarget.addEventListener()"
+
+***********************************
+
+The EventTarget method addEventListener() sets up a function that will be called 
+whenever the specified event is delivered to the target. 
+
+Common targets are Element, Document, and Window, but the target may be any 
+object that supports events (such as XMLHttpRequest).
+
+addEventListener() works by adding a function or an object that implements EventListener to 
+the list of event listeners for the specified event type on the EventTarget on which it's called.
+
+
+Syntax:
+        target.addEventListener(type, listener [, options]);
+        target.addEventListener(type, listener [, useCapture]);
+
+Parameters:
+
+    "type" - A case-sensitive string representing the event type to listen for.
+
+    "listener" - The object which receives a notification, or implements the Event interface, 
+        when an event of the specified type occurs. 
+        This must be an object implementing the EventListener interface, or a JavaScript function.
+
+    "options" - Optional object that specifies characteristics about the event listener. 
+    
+        The available options are:
+
+            "capture" - A Boolean indicating that events of this type will be dispatched to the 
+                registered listener before being dispatched to any EventTarget beneath it in the DOM tree.
+            
+            "once" - A Boolean indicating that the listener should be invoked at most once after being added. 
+                If true, the listener would be automatically removed when invoked.
+
+            "passive" - A Boolean which, if true, indicates that the function specified by listener will 
+                never call preventDefault(). 
+                If a passive listener does call preventDefault(), the user agent will do nothing other 
+                    than generate a console warning.
+
+    "useCapture" (Optional) - A Boolean indicating whether events of this type will be dispatched to 
+        the registered listener before being dispatched to any EventTarget beneath it in the DOM tree. 
+        Events that are bubbling upward through the tree will not trigger a listener designated to use capture.
+
+
+
+************************
+
+        EXAMPLES
+
+************************
+
+** Add a simple listener **
+
+This example demonstrates how to use addEventListener() to watch for mouse clicks on an element.
+
+HTML CODE:
+
+    <table id="outside">
+    <tr><td id="t1">one</td></tr>
+    <tr><td id="t2">two</td></tr>
+    </table>
+
+
+JavaScript code:
+
+// Function to change the content of t2
+function modifyText() {
+  const t2 = document.getElementById("t2");
+  if (t2.firstChild.nodeValue == "three") {
+    t2.firstChild.nodeValue = "two";
+  } else {
+    t2.firstChild.nodeValue = "three";
+  }
+}
+
+// Add event listener to table
+const el = document.getElementById("outside");
+el.addEventListener("click", modifyText, false);
+
+
+In this code, modifyText() is a listener for click events registered using addEventListener(). 
+A click anywhere in the table bubbles up to the handler and runs modifyText().
+
+RESULT:
+        one
+        two
+
+
+
+
+HOW TO ADD EVENT LISTENERS (to the Document Oject):
+
+You must access the "document" object, and call the addEventListener() method on it.
+
+Recall the syntax is - document.addEventListener(typeOfEvent, callback)
+
+
+Scott's example:
+
+document.addEventListener('click', function() {
+    alert();
+})
+
+This results in the browser displaying the alert whenever a click is registered on the page,
+the function executs every time the specified event occurs (i.e., click).
+
+
+The general idea of event listeners:
+
+    You attach an EventListener on to an element in your HTML file, then when that event
+    happens on that element, some type of function or code will execute.
+
+
+Instead of having the EventListener on the document object, we can call it on a specific HTML element.
+
+For example, if we had an element in our HTML with the ID of 'submit-text-btn' we can do the following:
+
+    // assigning the accessing of element to variable named "button".
+
+let button = document.getElementById('submit-text-btn'); 
+
+button.addEventListener('click', function() {
+    alert();
+});
+
+RESULT:
+    Now the EventListener only executes when the button itself is clicked, instead of anywhere on page.
+
+
+********************************************************************************************************
+
+
+let button = document.getElementById('submit-text-btn'); 
+
+
+function helloWorld() {
+    console.log('helloWorld');
+}
+
+// helloWorld(); // runs only once, unless we refresh the page.
+
+button.addEventListener('click', function() {
+    
+    // helloWorld();  // now every time button is clicked (event happens) this helloWorld() func runs.
+
+    
+
+});
+
+
+
+
+How to get the text in the in the input field to actually be submitted when that button is clicked.
+
+
+let button = document.getElementById('submit-text-btn'); 
+
+function getInputAndUpdate(inputElement) {
+    console.log(inputElement);  // logs the actual element to console
+    console.log(inputElement.value); // logs whatever value that was typed into input on page.
+
+    const text = inputElement.value; // stores the value typed into the input box, as a variable.
+    inputElement.value = ''; // this resets the value 
+    alert(text);  // the alert pops up when event happens, displaying the text from input value.
+
+}
+
+button.addEventListener('click', function() {
+    
+    // inside of this EventListener, we need to create a selector for inputElement
+    const inputElement = document.querySelector('input');
+
+    getInputAndUpdate(inputElement);
+
+});
+
+
+
+
+
+
+******************************************************************************************
+
+                            Selector Challenge Solution
+
+******************************************************************************************
+
+Goal: When a color is inserted in the input field and the button is clicked, the background color of `myHeader` will update.
+
+Directions:
+
+    1) Review the HTML id "challenge-code" and the "JS" file in codepen
+    
+    2) In the JS file, select the following objects in the DOM:
+           - `input`
+           - `button`
+           - `h2`
+        using `document.getElementById` and assign the HTML Elements to each variable in the JS File
+    
+    3) Review the directions in the event listener
+
+
+Using the HTML file with the following code:
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Selector Practice</title>
+</head>
+
+<body>
+
+  <div id='challenge-code'>
+    <h2 id='myHeader'> Introduction to DOM Selectors </h2>
+    <input type='text' id='background-color-input'>
+    <button id='background-color-btn'> Change the Background Color</button>
+    <br>
+    <a href='https://developer.mozilla.org/en-US/docs/Web/CSS/color_value'> Here is a list color keywords</a>
+  </div>
+  <br>
+  <hr>
+  <p>Goal: When a color is inserted in the input field and the button is clicked, the background color of `myHeader` will update.</p>
+  <h3> Directions:</h3>
+  <ol>
+    
+    <li>Review the HTML id "challenge-code" and the "JS" file in codepen</li>
+    <li>In the JS file, select the following objects in the DOM:
+      <ul>
+        <li>`input`</li>
+        <li>`button`</li>
+        <li>`h2`</li>
+      </ul>
+      using `document.getElementById` and assign the HTML Elements to each variable in the JS File
+    </li>
+    <li>Review the directions in the event listener</li>
+
+  </ol>
+</body>
+
+</html>                        
+
+
+
+
+The corresponding JavaScript file:
+
+
+// uncomment the variables and assign a DOM element to each variable using the document.getElementById selector
+const myHeader = document.getElementById('myHeader');
+const button = document.getElementById('background-color-btn');
+const input = document.getElementById('background-color-input');
+
+
+button.addEventListener('click', () => {
+  // get the "value" from the input field (look into the value property) https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement
+  // assign the backgroundColor value to the header's backgroundColor property, to access the backgroundColor property, don't forget to access `myHeader.style` first.
+  const inputValue = input.value;
+  
+  myHeader.style.backgroundColor = inputValue;
+  
+});

@@ -1,0 +1,358 @@
+*************************************************************************************************
+                                Elements and Tags
+*************************************************************************************************
+
+HTML consists of a series of elements, which you use to enclose, wrap, or mark up different parts 
+of the content to make it appear or act a certain way. 
+
+Here is the body of text from the previous section with the addition of HTML tags.
+Tags are used to markup the page so the web browser knows how to format and structure the text layout.
+
+<h1>The Raven - Edgar Allen Poe</h1>
+
+<p>Once upon a midnight dreary, while I pondered, weak and weary,
+Over many a quaint and curious volume of forgotten lore—
+While I nodded, nearly napping, suddenly there came a tapping
+As of some one gently rapping, rapping at my chamber door—
+"'Tis some visitor," I muttered, "tapping at my chamber door—                                                
+</p>
+<div align='right'>Only this and nothing more."</div>
+
+<p>
+Ah, distinctly I remember it was in the bleak December;
+And each separate dying ember wrought its ghost upon the floor.
+Eagerly I wished the morrow;—vainly I had sought to borrow
+From my books surcease of sorrow—sorrow for the lost Lenore—
+For the rare and radiant maiden whom the angels name Lenore—
+</p>
+<div align='right'>Nameless here for evermore.</div>
+<p>
+And the silken, sad, uncertain rustling of each purple curtain
+Thrilled me—filled me with fantastic terrors never felt before;
+So that now, to still the beating of my heart, I stood repeating,
+"'Tis some visitor entreating entrance at my chamber door—
+Some late visitor entreating entrance at my chamber door;—                                                
+</p>
+<div align='right'> This it is and nothing more."</div>
+
+
+The HTML Elements used in the example are:
+
+    <h1> - represents a header or title
+
+    <p> - represents a paragraph of text
+
+    <div> - represents a division
+
+        the <div> has an attribute (align) that moves its positioning to the right of the page.
+
+
+Each HTML element has its own set of characteristics that are applied to the formatting of the web page. 
+
+For example, the <h1> element increased the text size and adjusted the font weight to bold 
+and the <p> element added a line breaks and grouped text together.
+
+To apply an element, you need to use "tags". The general syntax of an HTML tag is:
+
+<TAG> TEXT </TAG>
+
+Tags are the building blocks or lego pieces you add to your web page to build the structure and layout.
+
+ANATOMY OF AN HTML ELEMENT:
+An element is an individual component of HTML such as paragraphs, headings, tables, lists, links, images, etc.
+
+A tag marks the beginning and end of an element in your document (web page) 
+and contains characters that indicate the purpose of the tag.
+
+
+ESSENTIAL TAGS OVERVIEW
+Here are some of the most commonly used HTML tags:
+
+Section Headings - <h1> - <h6>
+
+Paragraph:
+
+    Tag: <p> Hello World </p>
+    
+    Creates and separates a block of text from its surrounding elements with a blank space
+    
+    Paragraphs are block-level elements (we'll take a look at block vs inline elements soon)
+
+
+Anchor:
+
+    Tag: <a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a'> This is a Hyperlink </a>
+    
+    The Anchor element or <a></a> tag creates a hyperlink
+    
+    href is an attribute. An attribute provides extra configuration details or adds behavior to an element. 
+        href holds the reference to the link the user will be redirected to when clicked.
+
+
+Content Division:
+
+    Tag: `
+    content
+    
+    The div element is a flexibile container commonly used to group related elements with one another.
+
+
+
+
+
+*************************************************************************************************
+                                Section Headings
+*************************************************************************************************
+
+Headers are elements used to make your text stand out in a document such as adding a title to a page.
+
+They also help search engines to index and determine the content on a page.
+
+Here is an example of using the element.
+
+<h1> Always be coding... </h1>
+
+
+A header tag consists of the letter h, followed by a number between 1 and 6. 
+The numerical part of the tag is the header's size.  (1 = largest, 6 = smallest)
+
+
+
+*************************************************************************************************
+                                Paragraph Elements
+*************************************************************************************************
+
+Paragraphs elements in HTML are defined using the <p>content</p> tags. 
+
+Paragraphs can appear one after the other, adding information to a page as desired. 
+
+Another detail about the <p> element is that it only supports nested inline elements.
+
+
+What is an inline vs a block level element? 
+
+*************************************************************************************************
+                                Block vs Inline Elements
+*************************************************************************************************
+
+HTML Elements are divided into two categories, block-level, and inline elements. 
+These properties enforce certain rules of positioning of text and content.
+
+The first few elements we learned are all block-level elements, which begs the question, 
+what is a block-level element?
+
+BLOCK-LEVEL ELEMENTS:
+
+Block-level elements take up the full width of the document (web page) and "block out" elements to its left and right. 
+Take a look at the example below, notice how each element spans the full width of the page. 
+The block-level elements are viewable in the example below with a background color highlighting where 
+the element starts, ends, and the whole area it consumes.
+
+<h1 class='bg-red'> I am a block-level element! </h1>       // largest font, and text's background color is red
+<h2 class='bg-yellow'> I am a block-level element! </h2>
+<h3 class='bg-green'> I am a block-level element! </h3>
+<p class='bg-blue'> I am a block-level element! </p>
+<div class='bg-purple'> I am a block-level element! </div>
+
+
+Here is a list of some of the most common block-level elements:
+
+    Headers (<h1> - <h6>)
+    Forms (<form>)
+    Divisions (<div>)
+    List and List Items (<ol>, <ul>, and <li>)
+    Paragraphs (<p>)
+
+
+INLINE ELEMENTS:
+
+Inline elements stay on the same line and do not consume the available width, in other words, 
+inline elements sit next to other inline elements. 
+
+Here is an example of an inline element, the image <img> element.
+
+<img src='https://learndotresources.s3.amazonaws.com/workshop/5b61f79872a1ef0004c070da/Funny-Dog-1170x731.jpg'>
+
+<img src= 'https://learndotresources.s3.amazonaws.com/workshop/5b61f79872a1ef0004c070da/potato-spud.jpeg'>
+
+
+Here you can see the difference between an inline and block-level element. 
+The <img> elements are on different lines in our HTML file, but they sit next to each other in the view. 
+
+This is the key difference between an inline element and a block-level element.
+
+
+
+Here is another example of an inline element mixed with a block-level element. 
+The element used in this example is the <span> inline element:
+
+    <span class='bg-green'> Always </span> 
+    <span class='bg-blue'> Be </span> 
+    <h3 class='bg-yellow'> H3 block level element </h3>
+    <span class='bg-purple'> Coding </span>
+
+
+In the example, notice the <span> element is used on separate lines in the HTML file, 
+but on the page, they appear next to each other (at least the first two span elements). 
+
+The header element is a block-level element and consumes the available with of the line its on 
+and "blocks out" the surrounding elements (which is why the final span element is on its own line).
+
+
+
+Here is a list of common inline elements:
+
+    Spans (<span>)
+    Images (<img>)
+    Anchors (<a>) aka links
+
+
+
+*************************************************************************************************
+                                Attributes
+*************************************************************************************************
+
+HTML Elements can have additional information associated with them, called attributes. 
+
+We've seen a few attributes, such as the src attribute in an image element and the align attribute in a division (<div>) element.
+
+
+Attributes appear inside the opening tag of an element and their values sit inside quotation marks (or apostrophe),
+just like a string. Here is the generalized syntax of a tag with an attribute:
+
+    <tag attributeName="the value"> CONTENT </tag>
+
+
+
+There are a few common attributes common to all HTML elements, these are called Global Attributes. 
+The most common global attributes are:
+
+    class
+    id
+    hidden
+    title
+    style
+
+
+Elements also have specific attributes they recognize and interact with. 
+Let's take a look at a few of the specific attributes that the input element uses.
+
+
+APPLYING ATTRIBUTES:
+
+The input element has a self-closing tag (meaning we don't need to add a closing tag) and a few of 
+the compatible attributes can change the entire display and functionality of the input element. 
+
+Here is an example of the input element without any attributes, e.g.
+
+    <input>
+
+The <input> element adds a field where you can insert text. 
+If we wanted to inform our user what type of input to add, we can add a "placeholder" attribute that provides 
+a hint to users what text to enter. 
+
+
+Let's say our web page requires a different type of input, such as a checkbox, color value, or a file from your computer? 
+The input element has you covered with the type attribute. 
+
+Here are a few examples using the type attribute, notice how it changes the appearance and function of the input element.
+
+    <input type='file'>
+    <hr> <!-- hr (horizontal rule) adds a line break -->
+    <input type='color'>
+    <hr>
+    <input type='checkbox'>
+    <hr>
+    <input type='radio'>
+    <hr>
+    <input type='date'>
+
+
+
+Attributes can change the appearance and functionality of an element. 
+
+The type attribute adds a lot of functionality and versatility to the input element but, 
+what happens if you add the "type" attribute to a h1, p, or other tags we looked at? 
+
+Not much...they will just ignore the attribute. 
+
+Different tags have different attributes they "care about", elements may have specific attributes 
+they recognize such as the href attribute in an anchor (link) element or the src attribute in an image element.
+
+
+
+*************************************************************************************************
+                                Parent and Child Elements
+*************************************************************************************************
+
+HTML Elements can contain other HTML Elements, this is often called "nesting". Here is an example:
+
+    <div>
+
+    <h1> Child 1 </h1>
+    <h2> Child 2 </h2>
+
+
+    </div>
+
+
+In the example, we have 3 different elements and HTML uses a tree-like structure to name the positioning 
+of each element (just like a family tree). 
+
+
+Here are a few of the rules:
+
+    The outside element is called the parent element
+    The elements nested inside the parent are child elements or "children"
+    Every child element is a "sibling" to each other
+
+
+Applying the naming convention to the code snippet above:
+
+    the <div> element is the parent
+    <h1> and <h2> are children of the <div> element
+    <h1> and <h2> are siblings to one another
+
+
+By convention, child elements are indented 2 spaces inside their parent, 
+it's important to do this for the sake of readability. 
+
+HTML handles whitespaces on its own, so it is okay to add extra spacing to make your code readable.
+
+Here is another example:
+
+    <div id='food'>
+
+    <div id='desserts'>
+        <h1>Desserts</h1>
+        <ol>
+        <li>Ice Cream</li>
+        <li>Cake</li>
+        <li>Cookies</li>
+        </ol>
+    </div>
+
+    <div id='chicken'>
+        <h1>Chicken Dishes</h1>
+        <ol>
+        <li>Chicken Parm</li>
+        <li>Fried Chicken</li>
+        <li>Chicken Stirfry</li>
+        </ol>
+    </div>
+
+    <div id='sushi'>
+        <h1>Sushi Rolls</h1>
+        <ol>
+        <li>Tuna Roll</li>
+        <li>Tuna Avocado Roll</li>
+        <li>California Roll</li>
+        </ol>
+    </div>
+
+    </div>
+
+
+Notice the id attribute is used to label the separate division elements used. 
+
+

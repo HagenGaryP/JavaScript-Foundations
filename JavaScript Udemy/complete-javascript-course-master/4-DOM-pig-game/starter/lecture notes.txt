@@ -1,0 +1,979 @@
+***************************************************************************************************
+***************************************************************************************************
+***************************************************************************************************
+*
+*           Section 4: JavaScript in the Browser: DOM Manipulation and events
+*
+***************************************************************************************************
+***************************************************************************************************
+***************************************************************************************************
+
+
+
+
+***************************************************************************************************
+*
+* Lecture 45: The DOM and DOM Manipulation
+*
+***************************************************************************************************
+
+
+* DOM: Document Object Model.
+
+* The DOM is a structured representation of an HTML document that can be used to connect web pages
+    to scripts of programming languages such as JavaScript.
+
+* For reach HTML box, there is an object in the DOM that we can access and interact with.
+
+
+JavaScript and the DOM are two different things.  But now we will use special JS Methods that allow
+us to interact and manipulate/change the DOM, and therefore the webpage.
+
+Methods, meaning that they are functions attached to an object.  The object being the Document Object.
+
+So, this is the object that gives us access to the DOM.  
+
+The HTML webpage content is stored in the DOM, which can then be access and manipulated by JavaScript.
+
+
+***************************************************************************************************
+*
+* Lecture 46: HTML and CSS Crash Course
+*
+***************************************************************************************************
+
+Using the code from this section's index.html file
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
+        <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+        <link type="text/css" rel="stylesheet" href="style.css">
+        
+        <title>Pig Game</title>
+    </head>
+
+    <body>
+        <div class="wrapper clearfix">
+            <div class="player-0-panel active">
+                <div class="player-name" id="name-0">Player 1</div>
+                <div class="player-score" id="score-0">43</div>
+                <div class="player-current-box">
+                    <div class="player-current-label">Current</div>
+                    <div class="player-current-score" id="current-0">11</div>
+                </div>
+            </div>
+            
+            <div class="player-1-panel">
+                <div class="player-name" id="name-1">Player 2</div>
+                <div class="player-score" id="score-1">72</div>
+                <div class="player-current-box">
+                    <div class="player-current-label">Current</div>
+                    <div class="player-current-score" id="current-1">0</div>
+                </div>
+            </div>
+            
+            <button class="btn-new"><i class="ion-ios-plus-outline"></i>New game</button>
+            <button class="btn-roll"><i class="ion-ios-loop"></i>Roll dice</button>
+            <button class="btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
+            
+            <img src="dice-5.png" alt="Dice" class="dice">
+        </div>
+        
+        <script src="app.js"></script>
+    </body>
+</html>
+
+
+In HTML there are ELEMENTS which are usually composed of opening tags, content, and closing tags.
+
+These elements are written into one another, creating the nested structure seen above in the code.
+
+There are elements for different things, such as links, paragraphs, images, sections, etc...
+
+Elements can have plain text, other elements, or attributes inside them.
+
+
+For example, class, id, source (src), alt, type, rel, href, etc....
+
+One of the most used is the class attribute, which can be used to give a certain element a name,
+and IDs, which could allow us to also give an element a name, but the difference is that
+an ID has to be unique, but a class name can be used over and over throught the pages.
+
+
+Structure of HTML document:  Divided into two parts, the header and the body.
+
+The body contains the visible content of a web page, and it is basically everything enclosed in
+the <body> </body> tags.
+
+The header is what contains additional information about a web page, such as the title or 
+    some page keywords, and we can also do other things inside the header.
+For example, 
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+ 
+ The above code imports a custom font from Google fonts and also an icon font to usue icons on the interface.
+
+ We then connect our HTML file to a CSS style sheet:
+    <link type="text/css" rel="stylesheet" href="style.css">
+
+
+**********************************************************************************************
+
+CSS file from this section
+
+***************************
+
+/**********************************************
+*** GENERAL
+**********************************************/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+body {
+    background-image: linear-gradient(rgba(62, 20, 20, 0.4), rgba(62, 20, 20, 0.4)), url(back.jpg);
+    background-size: cover;
+    background-position: center;
+    font-family: Lato;
+    font-weight: 300;
+    position: relative;
+    height: 100vh;
+    color: #555;
+}
+
+.wrapper {
+    width: 1000px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.player-0-panel,
+.player-1-panel {
+    width: 50%;
+    float: left;
+    height: 600px;
+    padding: 100px;
+}
+
+
+
+/**********************************************
+*** PLAYERS
+**********************************************/
+
+.player-name {
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 100;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.player-score {
+    text-align: center;
+    font-size: 80px;
+    font-weight: 100;
+    color: #EB4D4D;
+    margin-bottom: 130px;
+}
+
+.active { background-color: #f7f7f7; }
+.active .player-name { font-weight: 300; }
+
+.active .player-name::after {
+    content: "\2022";
+    font-size: 47px;
+    position: absolute;
+    color: #EB4D4D;
+    top: -7px;
+    right: 10px;
+    
+}
+
+.player-current-box {
+    background-color: #EB4D4D;
+    color: #fff;
+    width: 40%;
+    margin: 0 auto;
+    padding: 12px;
+    text-align: center;
+}
+
+.player-current-label {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #222;
+}
+
+.player-current-score {
+    font-size: 30px;
+}
+
+button {
+    position: absolute;
+    width: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #555;
+    background: none;
+    border: none;
+    font-family: Lato;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 300;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover { font-weight: 600; }
+button:hover i { margin-right: 20px; }
+
+button:focus {
+    outline: none;
+}
+
+i {
+    color: #EB4D4D;
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 32px;
+    line-height: 1;
+    vertical-align: text-top;
+    margin-top: -4px;
+    transition: margin 0.3s;
+}
+
+.btn-new { top: 45px;}
+.btn-roll { top: 403px;}
+.btn-hold { top: 467px;}
+
+.dice {
+    position: absolute;
+    left: 50%;
+    top: 178px;
+    transform: translateX(-50%);
+    height: 100px;
+    box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
+}
+
+.winner { background-color: #f7f7f7; }
+.winner .player-name { font-weight: 300; color: #EB4D4D; }
+
+***********************************************************
+
+
+CSS is the presentation of the webpage, and in the file is where we write rules to style the page.
+
+The way we connect the HTML with the CSS is by using class names; can also use IDs or other selectors, but not as common.
+
+
+
+***************************************************************************************************
+*
+* Lecture 48: First DOM Access and Manipulation
+*
+***************************************************************************************************
+
+Overview:
+
+    * How to create our fundamental game variables
+
+    * How to generate a random number
+
+    * How to manipulate the DOM
+
+    * How to read from the DOM
+
+    * How to change CSS styles
+
+
+
+* How to generate a random number
+
+// Create the dice - need to use math object Math.random() and math.floor() to remove the decimal
+
+dice = Math.floor(Math.random() * 6) + 1;
+console.log(dice);
+
+
+* Accessing DOM:  document.querySelector()
+
+The Document method querySelector() returns the first Element within the document that matches the 
+    specified selector, or group of selectors. If no matches are found, null is returned.
+
+Syntax:
+    element = document.querySelector(selectors);
+
+Parameters - selectors:
+    A DOMString containing one or more selectors to match. 
+    This string must be a valid CSS selector string; if it isn't, a SYNTAX_ERR exception is thrown. 
+
+Return value:
+    An HTMLElement object representing the first element in the document that matches the specified 
+    set of CSS selectors, or null is returned if there are no matches.
+
+To list all elements matching the specified selectors, you should use querySelectorAll() instead.
+
+SELECTORS:
+    The selector methods accept one or more comma-separated selectors to determine what element or elements 
+    should be returned. For example, to select all paragraph (p) elements in a document whose CSS class is 
+    either warning or note, you can do the following:
+
+        var special = document.querySelectorAll( "p.warning, p.note" );
+
+    You can also query by ID. For example:
+
+        var el = document.querySelector( "#main, #basic, #exclamation" );
+
+    After executing the above code, el contains the first element in the document whose ID is one of main, 
+    basic, or exclamation.
+
+
+
+Types of selectors:
+
+    There are a few different groupings of selectors, and knowing which type of selector you might need will 
+    help you to find the right tool for the job. In this article's subarticles we will look at the different 
+    groups of selectors in more detail.
+
+    Type, class, and ID selectors:
+        This group includes selectors that target an HTML element such as an <h1>.
+
+            h1 { }
+
+
+    It also includes selectors which target a class:
+
+            .box { }
+
+
+    or, an ID:
+
+            #unique { }
+
+
+    Attribute selectors:
+        This group of selectors gives you different ways to select elements based on the presence of 
+        a certain attribute on an element:
+
+            a[title] { }
+
+        Or even make a selection based on the presence of an attribute with a particular value:
+
+            a[href="https://example.com"] { }
+
+
+    Pseudo-classes and pseudo-elements:
+        This group of selectors includes pseudo-classes, which style certain states of an element. 
+        The :hover pseudo-class for example selects an element only when it is being hovered over 
+        by the mouse pointer:
+
+            a:hover { }
+
+        It also includes pseudo-elements, which select a certain part of an element rather than the 
+        element itself. 
+        For example, ::first-line always selects the first line of text inside an element 
+        (a <p> in the below case), 
+        acting as if a <span> was wrapped around the first formatted line and then selected.
+
+            p::first-line { }
+
+
+    Combinators:
+        The final group of selectors combine other selectors in order to target elements within our documents.
+         The following for example selects paragraphs that are direct children of <article> elements using the 
+         child combinator (>):
+
+            article > p { }
+
+
+Reference table of selectors:
+
+    ****************************************************************************************************
+    ****************************************************************************************************
+
+    SELECTOR	                        EXAMPLE	                        "Learn CSS tutorial"     
+                                                                        (developer.mozilla.org)
+    ****************************************************************************************************
+    ****************************************************************************************************
+    Type selector	                    h1 {  }	                        Type selectors
+    ----------------------------------------------------------------------------------------------------
+    Universal selector	                * {  }	                        The universal selector
+    ----------------------------------------------------------------------------------------------------
+    Class selector	                    .box {  }	                    Class selectors
+    ----------------------------------------------------------------------------------------------------
+    id selector	                        #unique { }	                    ID selectors
+    ----------------------------------------------------------------------------------------------------
+    Attribute selector	                a[title] {  }	                Attribute selectors
+    ----------------------------------------------------------------------------------------------------
+    Pseudo-class selectors	            p:first-child { }	            Pseudo-classes
+    ----------------------------------------------------------------------------------------------------
+    Pseudo-element selectors	        p::first-line { }	            Pseudo-elements
+    ----------------------------------------------------------------------------------------------------
+    Descendant combinator	            article p	                    Descendant combinator
+    ----------------------------------------------------------------------------------------------------
+    Child combinator	                article > p	                    Child combinator
+    ----------------------------------------------------------------------------------------------------
+    Adjacent sibling combinator	        h1 + p	                        Adjacent sibling
+    ----------------------------------------------------------------------------------------------------
+    General sibling combinator	        h1 ~ p	                        General sibling
+    ----------------------------------------------------------------------------------------------------
+    ****************************************************************************************************
+
+Examples:
+
+    Finding the first element matching a class:
+        In this example, the first element in the document with the class "myclass" is returned:
+
+         var el = document.querySelector(".myclass");
+
+    A more complex selector
+        Selectors can also be really powerful, as demonstrated in the following example. 
+        Here, the first <input> element with the name "login" (<input name="login"/>) 
+        located inside a <div> whose class is "user-panel main" (<div class="user-panel main">) 
+        in the document is returned:
+
+        var el = document.querySelector("div.user-panel.main input[name='login']");
+
+
+
+// select HTML element with document.querySelector('#elementName'), 
+    and concatenate the string to allow for active player change
+
+    When using querySelector() to select a 
+
+
+* How to manipulate the DOM - .textContent and .innerHTML
+
+The textContent property sets or returns the text content of the specified node, and all its descendants.
+
+If you set the textContent property, any child nodes are removed and replaced by a single Text node 
+containing the specified string.
+
+Note: This property is similar to the innerText property, however there are some differences:
+
+    textContent returns the text content of all elements, while innerText returns the content of all elements,
+        except for <script> and <style> elements.
+
+    innerText will not return the text of elements that are hidden with CSS (textContent will). 
+
+    Tip: Sometimes this property can be used instead of the nodeValue property, but remember that 
+        this property returns the text of all child nodes as well.
+
+    Tip: To set or return the HTML content of an element, use the innerHTML property.
+
+
+The innerHTML property sets or returns the HTML content (inner HTML) of an element.
+
+Syntax:
+    
+    Return the innerHTML property:
+
+        HTMLElementObject.innerHTML
+
+
+    Set the innerHTML property:
+
+        HTMLElementObject.innerHTML = text
+    
+Property Values:
+
+    The value is "text", which specifies the HTML content of an element.
+
+
+// changing the content of an HTML element with .textContent
+
+document.querySelector('#current-' + activePlayer).textContent = dice;      // SETTER
+// selecting the HTML id for active player, changing text here
+
+// To change the content of the selection with textContent, ONLY for plain text, not HTML
+
+// To put some HTML also in the selected element, use the inner HTML method instead of textContent.
+// When writing HTML in our code, it MUST BE A STRING.
+//document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
+
+var x = document.querySelector('#score-0').textContent;                 // GETTER
+console.log(x);
+
+// using querySelector to change the CSS of class="dice"    ('.className').style.cssProperty = 'cssValue';
+
+document.querySelector('.dice').style.display = 'none';
+
+
+
+
+***************************************************************************************************
+*
+* Lecture 49: Events and Event Handling
+*
+***************************************************************************************************
+
+Lecture Topics:
+
+    * How to set up an Event Handler.
+
+    * Callback functions.
+    
+    * Anonymous functions.
+
+    * Another way to select elements by ID.
+
+    * How to change the image in an <img> element.
+
+
+
+* Events:  Notifications that are sent to notify the code that something happened on the webpage.
+
+    Examples: Clicking a button, resizing a window, scrolling down, or pressing a key.
+
+* Event Listeners: A function that performs an action based on a certain event.
+                    It waits for a specific event to happen.
+
+
+* How are events processed?
+
+An event can only be processed, or handled, as soon as the Execution Stack is empty.
+Which means, all of the functions have returned.
+
+Message Queue - 
+    In the JavaScript engine, this is where all the events that happen in the browser are put.
+    The events stay here, waiting to be processed, which only happens once the Execution Stack is empty.
+
+Remember, that we can have something called an Event Listener, which is a function that reacts to an event.
+So, that event listener is now called.  
+Since it's a function, it gets its own Execution Context, which is then put at the top of the stack, 
+    and becomes the active Execution Context.
+
+
+
+* Setting up an event handler:
+
+For a reference, use: https://developer.mozilla.org/en-US/docs/Web/Events
+
+
+.addEventListener('typeOfEvent', functionName)
+
+
+function btn() {
+    //Do something here
+}
+btn();
+
+document.querySelector('.btn-roll').addEventListener('click', btn);  
+
+btn is now a callback function, since it is not called by us, but by another function - the Event Listener.
+
+* Callback function
+
+The function that we pass into another function as an argument, in our example, the EventListener method.
+
+What if we didn't want to have an external function that gets called by the event handler?
+
+Then, we could simply add the function, in the .addEventListener('typeOfEvent', function() {
+
+})
+
+* Anonymous function
+    A function that doesn't have a name, and so, it cannot be reused.
+
+// Using document.getElementById('idString') instead of querySelector.  Doesn't use the CSS style
+
+document.getElementById('score-0').textContent = '0'
+document.getElementById('score-1').textContent = '0'
+document.getElementById('current-0').textContent = '0'
+document.getElementById('current-1').textContent = '0'
+
+document.querySelector('.btn-roll').addEventListener('click', function() {  // anonymous function
+   
+    // 1. Random Number
+    var dice = Math.floor(Math.random() * 6) + 1;   // only this anonymous function can access dice variable
+
+    // 2. Display the result - can create a variable that stores img selection, to use when needed.
+    var diceDOM = document.querySelector('.dice') // can now use variable 'diceDOM' instead of writing it out
+    diceDOM.style.display = 'block';
+            // changing the image with .src
+    diceDOM.src = 'dice-' + dice + '.png';     // concatenating so the dice roll correpsonds with its img.
+
+
+    // 3. Update the round score IF the rolled number was NOT a 1
+
+
+});
+
+
+***************************************************************************************************
+*
+* Lecture 50: Updating Scores and Changing the Active Player
+*
+***************************************************************************************************
+
+Lecture Topics:
+
+* What is the Ternary Operator?
+
+* How to add, remove, and toggle HTML classes.
+
+document.querySelector('.btn-roll').addEventListener('click', function() {  // anonymous function
+   
+    // 1. Random Number
+    var dice = Math.floor(Math.random() * 6) + 1;   // only this anonymous function can access dice variable
+
+    // 2. Display the result - can create a variable that stores img selection, to use when needed.
+    var diceDOM = document.querySelector('.dice') // can now use variable 'diceDOM' instead of writing it out
+    diceDOM.style.display = 'block';
+            // changing the image with .src
+    diceDOM.src = 'dice-' + dice + '.png';     // concatenating so the dice roll correpsonds with its img.
+
+
+    // 3. Update the round score IF the rolled number was NOT a 1
+    if (dice !== 1) {
+        // Add score
+        roundScore += dice;
+        document.querySelector('#current-' + activePlayer).textContent = roundScore; 
+    } else {
+        // Next player - using Ternary Operator instead of if-statement
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; 
+        // if activePlayer is 0, then activePlayer = 1 : else activePlayer = 0
+        roundScore = 0;  // set roundscore back to zero
+
+        document.getElementById('current-0').textContent = '0';
+        document.getElementById('current-1').textContent = '0';       
+                
+        // removing 'active' from the HTML for player-0-panel, adding it to player-1-panel for activePlayer
+        //document.querySelector('.player-0-panel').classList.remove('active');
+        //document.querySelector('.player-1-panel').classList.add('active');
+
+        // using .toggle instead of removing and adding
+        document.querySelector('.player-0-panel').classList.toggle('active');
+        document.querySelector('.player-1-panel').classList.toggle('active');
+
+        // hide the dice when a 1 is rolled.
+
+        document.querySelector('.dice').style.display = 'none';
+
+    }
+});
+
+
+
+
+***************************************************************************************************
+*
+* Lecture 51: Implementing our 'hold' function, and The Dry Principle
+*
+***************************************************************************************************
+
+Lecture Topics:
+
+    * How to use functions to correctly apply the DRY principle, "Don't repeat yourself" principle.
+
+    * How to think about the game logic like a programmer.
+
+
+Since we want to toggle between players often, we can create a function to be called upon
+whenever we want to switch to the next player.  This avoids repeating code, makes it cleaner to read.
+
+
+function nextPlayer() {
+    // Next player - using Ternary Operator instead of if-statement
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+    // if activePlayer is 0, then activePlayer = 1 : else activePlayer = 0
+    roundScore = 0;  // set roundscore back to zero
+
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+
+    // removing 'active' from the HTML for player-0-panel, adding it to player-1-panel for activePlayer
+    //document.querySelector('.player-0-panel').classList.remove('active');
+    //document.querySelector('.player-1-panel').classList.add('active');
+
+    // using .toggle instead of removing and adding
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');
+
+    // hide the dice when a 1 is rolled.
+
+    document.querySelector('.dice').style.display = 'none';
+}
+
+
+
+Using the scores array, with the index of "activePlayer", which is either 0 or 1, we're able to add 
+the score from the round, as well as check whether that score reached the amount to win.
+
+When using the querySelector on the ID 'score-0' and 'score-1', we can concatenate the string of the 
+html ID value with the activePlayer ('#score-' + activePlayer).  This allows for the .textContent to be 
+changed to the score of the active player, and not specifically player1 or player2.
+
+The same concatenation was used for classes ('.player-' + activePlayer + '-panel').classList.toggle('strValue')
+the 'active' string, that is literally written in the HTML code, between 1st and 2nd player.  
+This could also be done with .classList.add('stringValue') or .classList.remove('stringValue'), which actually
+will add that string value to the HTML element or remove it, if that string is found where specified.
+
+
+document.querySelector('.btn-hold').addEventListener('click', function () {
+    // Add CURRENT score to GLOBAL score
+    scores[activePlayer] += roundScore;  // activePlayer toggles from 0 to 1, so it's the index of the array.
+    
+    // Update the User Interface (UI)
+    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+    // Check if player won the game
+    if (scores[activePlayer] >= 100) {
+        document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+
+    } else {
+        // next player
+        nextPlayer();
+    }
+
+});
+
+
+
+
+
+***************************************************************************************************
+*
+* Lecture 52, 53: Creating a Game Initialization Function.  Finishing touches.
+*
+***************************************************************************************************
+
+We want to initialize the "NEW GAME" button at the top of our game's panel.
+
+Since we have a button and an event that we want to take place, we need '.addEventListener'.
+
+The name of the button is 'btn-new' in the HTML code, so we use the querySelector on this string
+and listen for a 'click', to then carry out a function.
+
+The first part of starting a new game would be to reset the scores and activePlayer, but since we already 
+have this, we should stick to the 'dry principle' and simply make it a function that initializes the game.
+
+
+
+// New Game button functionality
+document.querySelector('.btn-new').addEventListener('click', init);  // EventListener calls init function
+
+
+// initializing the game
+function init() {
+    // reset scores
+    scores = [0, 0];
+    activePlayer = 0;
+    roundScore = 0;
+
+    // removes the dice display
+    document.querySelector('.dice').style.display = 'none';
+
+    // setting score displays to '0' - .getElementById does not use the element's prefix ( # and . )
+    document.getElementById('score-0').textContent = '0';
+    document.getElementById('score-1').textContent = '0';
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+
+    // displaying player 1 and player 2, instead of 'winner!'
+    document.getElementById('name-0').textContent = 'Player 1';
+    document.getElementById('name-1').textContent = 'Player 2';
+
+    // removing the winner and active strings from both player panels
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
+    document.querySelector('.player-0-panel').classList.remove('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
+
+    // addding the active player to player 1
+    document.querySelector('.player-0-panel').classList.add('active');
+}
+
+
+The game works just fine at this point, but you can continue to roll the dice even after someone wins.
+
+To fix this, we need something called a 'State Variable', which tells us the condition of a system.
+
+We use a State Variable when we need to remember the state of something.  In this case, the state of
+actually playing the game.
+
+Used state variable, gamePlaying, on the buttons we only wanted to work while game is playing.
+So, we wrapped the code in an if/else statement to only execute if the gamePalying = true,
+and set gamePlaying = false when someone wins, game ends.
+
+***********************************************************************************************
+
+
+coding challenge notes
+
+
+FIRST: You must comment out the HTML line that links the script to "app.js" by wrapping in <!--  -->
+
+            <!--<script src="app.js"></script>-->
+
+        Then link the HTML script src to this "challenges.js" file
+
+            <script src="challenges.js"></script>
+
+added a global variable, lastDice to store the value of the last dice, to be checked if two 6's are rolled.
+So the code inside our roll button contains the following: 
+
+if (dice === 6 && lastDice === 6) {
+            //player loses score
+            scores[activePlayer] = 0;
+            // update UI
+            document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+            // switch to next player
+            nextPlayer();
+
+        } else if (dice !== 1) {
+            // Add score
+            roundScore += dice;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        } else {
+            // Next player function for dry principle.
+            nextPlayer();
+        }
+
+        // storing the lastDice value
+        lastDice = dice;
+
+
+** allowing user to change the target/winning score
+
+Add an input element to the HTML's body <div> that allows the user to input text, with an initialize
+"placeholder" of "Final score", and uses the CSS class "final-score".  So, the HTML line of code will be:
+
+    <input type="text" placeholder="Final score" class="final-score">
+
+The style.css will have to have this class "final-score" added to it, telling it how to display.
+
+.final-score {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 520px;
+    color: #555;
+    font-size: 18px;
+    font-family: 'Lato';
+    text-align: center;
+    padding: 10px;
+    width: 160px;
+    text-transform: uppercase;
+}
+
+.final-score:focus { outline: none; }
+
+This is what the lecturer used in the style sheet to design the final score box.
+
+Now we have to change our 'hold' button functionality, which also checks to see if a player has won.
+
+
+// functionality of the 'hold' button
+document.querySelector('.btn-hold').addEventListener('click', function () {
+    // only executes if gamePlaying state variable = true.
+    if (gamePlaying) {
+        // Add CURRENT score to GLOBAL score
+        scores[activePlayer] += roundScore;  // activePlayer toggles from 0 to 1, so it's the index of the array.
+
+        // Update the User Interface (UI)
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+        // input score for final score to win game
+        var input = document.querySelector('.final-score').value;
+        var winningScore;
+
+        // check if input value is empty:  undefined, 0, null, or "" are COERCED to false
+        //      anything else is coerced to true
+        if (input) {
+            winningScore = input;
+            
+        } else {
+            winningScore = 100;
+        }
+
+        // Check if player won the game
+        if (scores[activePlayer] >= winningScore) {
+            document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+
+            // change gamePlaying state variable to false
+            gamePlaying = false;
+
+        } else {
+            // next player
+            nextPlayer();
+        }
+    }
+});
+
+The local variables "input" and "winningScore" are created inside the if-statement for gamePlaying state.
+
+    var input = document.querySelector('.final-score').value;
+
+This sets the input variable to the .value in our querySelector('.final-score'), so, anything typed into this 
+box is the value of our input.  Having an issue with the type coercion for this, as well as strings.
+
+
+Making two dice, need to change HTML to
+    <img src="dice-5.png" alt="Dice" class="dice" id="dice-1">
+    <img src="dice-5.png" alt="Dice" class="dice" id="dice-2">
+
+Notice: An ID was added to differentiate between them.  
+
+In our style.css file, we needed to set the location of the images for each of the dice, so we added:
+
+#dice-1 { top: 120px; }
+#dice-2 { top: 250px; }
+
+
+Inside our roll function, we declare these dice variables within the gamePlaying if-statement
+
+        var dice1 = Math.floor(Math.random() * 6) + 1;   
+        var dice2 = Math.floor(Math.random() * 6) + 1;
+        
+        // 2. Display the result - can create a variable that stores img selection, to use when needed.
+        document.getElementById('dice-1').style.display = 'block';
+        document.getElementById('dice-2').style.display = 'block';
+
+        // changing the image with .src
+        document.getElementById('dice-1').src = 'dice-' + dice1 + '.png';  
+        document.getElementById('dice-2').src = 'dice-' + dice2 + '.png';  
+
+        // 3. Update the round score IF the rolled number was NOT a 1 or two 6's
+
+        if (dice1 !== 1 && dice2 !== 1) {
+            // Add score
+            roundScore += dice1 + dice2;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        } else {
+            // Next player function for dry principle.
+            nextPlayer();
+        }
+
+
+Also need to change the display of the dice in all other areas.

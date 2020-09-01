@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>My first blog post</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    
+    </head>
+
+    <body>
+        <div class="container">
+            
+            <div class="blog-post">
+                <h1 align="center">HTML and CSS</h1> <br>
+                
+                <p class="date">May 14th, 2019</p>
+                
+                <h2>HTML Outline</h2>
+
+
+                <p class="main-text">
+                    HTML Documents are described by HTML Tags <br>
+                    To write in bold, use the <strong>"strong"</strong> tag. <br>
+                    Use <strong>"em"</strong> (emphasize) tag for <em>Italics / emphasize</em> <br>
+                    use <strong>"u"</strong> tag for <u>underlined</u> text. <br>
+                    <br>
+                    Tags mark up the beginning and end of an element, using the general syntax: <strong>"tagname"  content  "/tagname"</strong> <br> Where the tagnames are enclosed in less-than and greater-than brackets and not the quotes used for example. <br>
+
+                </p>
+
+                <h3> Basic HTML Structure</h3>
+
+                <p class="main-text">
+                    The first thing in the HTML file should be <strong>"!DOCTYPE html"</strong> which tells the browser the document's type is html5. <br> 
+                    then <strong>"html"</strong> tag <br>
+                    Indent heading and use the<strong>"head"</strong> tag, which contains the tags and elements: <em>title, scripts, (css) styles, and meta info</em> - search engine info. <br>
+                    Keeping same indentation, use the <strong>"body"</strong> tag for anything you want to be directly visible on the web page. <br>
+                    Indent again (2 indents) for <strong>"h1" "h2" ... "h6"</strong>(h6 is smallest) to write a Header Tag.<br>
+                    Use Paragraph <strong>"p"</strong> tag for text body like this paragraph. 
+
+                </p>
+
+
+                <img src="logo.jpg" alt="HTML Syntax and Structure">
+                <p class="html-syntax">HTML Syntax above</p>   <br>
+
+                <h6 align="right">This is a "h6 align="right" " header</h6>                  
+                <img src="tag_Attributes.jpg" alt="Opening Tag Attributes">
+
+                <p>Attributes are just additional info about an element.</p>
+                <h4>To insert an image use the <u>"img" tag with attribute 'src'</u></h4>            
+                <img src="html-attributes.jpg" alt="HTML Attributes"> <br> <br> <br>
+
+                <h3>To insert a hyperlink use <u>"a" tag with "href=" </u></h3> 
+                <p>
+                    For example:         <strong>"a href="http://www.SiteName.com">Hyperlink display name" "/a"</strong> <br><br>
+                    To have link open in a new tab use <strong>targets="_blank"</strong> after the <em>href=</em> link.  Which can be used for a website or even an image. <br>For example: <br><br>
+                    <strong>"a href="logo.jpg" target="_blank">HTML Syntax "/a"</strong>
+
+
+                </p> <br>
+
+                <a href="https://www.w3schools.com/tags/" target="_blank">HTML Tags Reference List</a>
+
+
+
+                <h2>Cascading Style Sheets (CSS)</h2>
+
+                <p>
+                    CSS defines exactly how HTML looks and allows to make a clear separation between <strong>content (HTML)</strong> and <strong>style (CSS)</strong> <br> <br>
+
+                    <strong> Three ways to use CSS</strong> <br> <br>
+                    1. CSS code written insdie an HTML tag using 'style='. (i.e., p style="font_size: 120%") <br> <br>
+                    2. CSS code written in the head section of HTML doc by using the <strong>"style"</strong> tag. <br> (i.e., "style" <br> (indent) p {<br>(indent)font-size: 120% <br> (dedent)} <br> (dedent) "/style") <br> <br>
+                    3. <strong>Most Practical -</strong> CSS can be put into an external file. (i.e., open new file and save it as "style.css") <br><br>
+
+                </p>
+
+                <h3>Linking style.css to your index.html file</h3>
+                <p>
+                    In the <strong>"head"</strong> tag section of your html file, use the <strong>"link"</strong> tag, which doesn't have an ending tag ("/link" is not used) <br><br> For Example: <br> <br>
+                    link rel="stylesheet" type="text/css" href="style.css"<br><br>            
+                </p>
+
+                <h3> Coding inside the CSS file itself</h3>
+                <p>
+                    CSS itself is written in rules, which consists of a <strong>selector</strong> and a <strong>declaration block</strong> <br><br>Start by formatting the main heading, using the selector "h1" which will select all "h1" elements and format them. <br>For Example <br> <br>
+                    h1, h2 { This is for things h1 and h2 have in common<br>
+                        color: green; <br>
+                        font-family: Helvetica Neue, Arial;<br>
+                    }<br><br>
+
+                    h1 {<br>
+                        font-size: 40px;<br>    
+                    }<br><br>
+
+
+                    h2 {<br>
+                        font-size: 25px; <br>    
+                    } <br><br>
+
+                    <strong>Quick Edit</strong> a CSS file while inside your HTML file using <strong>ctrl+E</strong> on the tag you want to format.
+
+                </p>
+
+                <h3>The RGB Model</h3>
+                <p>
+                    In the RGB Model, each color is defined using a combination of Red, Green, and Blue.  Hexadecimal notation is used #RRGGBB <br><br>
+                    <strong>For each color:</strong><br> Min: 0 (hex 0)<br> Max: 255 (hex ff)<br>        
+                </p>
+                <img src="hex-colors.jpg" alt="The RGB Model">
+                <h4>Some Hexadecimal color codes</h4>
+                <img src="hex-codes.jpg" alt="Hexadecimal Codes"> <br> <br>
+
+                <p>If all 6 numbers in hexadecimal code are the same, instead of typing #555555 we can write #555</p>
+
+                <h4>Transparency with RGBA</h4>
+                <p>
+                    Ex: rgba(29, 167, 23, <strong>0.75</strong>) <br><br> This shows a green rectangle with <strong>75% transparency</strong> <br><br>
+                    You can adjust each color in the CSS file by clicking the color name or hex and using the hot key <strong>ctrl+E</strong> which opens up a quick edit for that color. <br> Here you're able to adjust the transparency and color shade.
+                </p>
+            </div>
+            
+            <div class="other-posts">
+                <div class="other">
+                    The first 'other' blog post
+                </div>
+                
+                <div class="other">
+                    The second 'other' blog post
+                </div>
+                
+                <div class="other">
+                    The third 'other' blog post
+                </div>
+            
+            </div>
+            
+            <div class="author-box">
+                Author info here
+            </div>
+        
+        </div>
+    
+    </body>
+
+</html>

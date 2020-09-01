@@ -1,0 +1,125 @@
+Advanced JavaScript: Objects and Functions
+
+***********************************************************************************************
+Lecture 60
+
+Everything is an Object: Inheritance and the Prototype Chain
+
+***********************************************************************************************
+
+Primtives: Numbers, Strings, Booleans, Undefined, Null
+
+Everything Else is an object: Arraays, Functions, Objects, Dates, 
+            Wrappers for Numbers / Strings / Booleans
+
+
+Object-Oriented Programming:
+
+    * Objects interacting with one another through methods and properties.
+
+    * Used to store data, structure applications into modules and keep code clean.
+
+
+
+Constructors and Instances in JavaScript:
+
+Imagine a blueprint to create a lot of objects that have the same specs but just differ in name of specs.
+
+For example, if we want to have a special object, "Person" with a name, birthday, job, etc.. 
+
+In other languages, this object would be a CLASS, but in JavaScript it is a CONSTRUCTOR.
+
+The constructor acts like a blueprint and is used to create instances, which are also objects themselves.
+
+
+Inheritance in General - When one object is based on another object.  
+
+It is when one object gets access to another object's properties and methods.
+
+For example, if we had an "Athlete" constructor, aside from the "Person" constructor, with a couple different
+properties and methods.
+
+Since an athlete is also a person, we want to find a way to avoid repeating ourselves.
+
+
+What we do is use Inheritance.  
+We make the "Athlete" object inherit properties and methods from the "Person" object, so that the "Athlete"
+has access to the properties and methods from the "Person" object, as well as its own.
+
+
+
+How does JavaScript (in particular) handle inheritance?
+
+Inheritance in JavaScript: Prototypes and Prototype Chains
+
+
+JavaScript is a Prototype-based language, which means that inheritance works by using protypes.
+
+That means that each and every JavaScript object has a prototype property, which makes inheritance possible.
+
+
+How does inheritance actually work?
+
+In the example using the "Person" object as the constructor and "John" is one of the instances.
+
+If we want "John" to inherit a method or a property from the "Person" object, we have to add that method
+or property to the "Person's" prototype property.
+
+So, in this example, we have a method called "calculateAge" in the Person's prototype property, and therefore
+John inherits the method and can call it.
+
+
+The Prototype Property of an object is where we put methods and properties that we want other objects to inherit.
+
+
+NOTE: The Person prototype is not the prototype of the person itself, but of all instances created through
+    the Person blueprint / constructor.
+
+    In other words, the Person's Prototype property is the prototype of John, and because the Person object
+    itself is an instance of an even bigger constructor, which is the "Object" object.
+
+Every Object created is an instance of the "Object" constructor, which has a bunch of methods in its
+    prototype property.  
+
+The "Person" object inherits them, and so John also inherits those; This is the Prototype Chain.
+
+When trying to access a certain method/property on an object, JS will first try to find that method on
+    the exact object.  If it can't find it, it will look in the object's prototype, which is the 
+    prototype property of its parent. So, it moves up the prototype chain.
+
+If the method still isn't there, it continues until there is no prototype to look at, which is 'null'
+
+
+
+
+Summary:
+
+    * Every JavaScript object has a PROTOTYPE PROPERTY, which makes inheritance possible in JS.
+
+    * The prototype property of an object is where we put methods and properties that we want
+        OTHER OBJECTS to inherit.
+
+    * The Constructor's prototype property is NOT the protype of the constructor itself, it is the
+        protoype of ALL instances that are created through it.
+
+    * When a certain method (or property) is called, the search starts in the object itself, and if it
+        cannot be found, the search moves on to the object's protoype.
+        This continues until the method is found: PROTOTYPE CHAIN.
+
+
+
+
+***********************************************************************************************
+Lecture 
+
+
+
+***********************************************************************************************
+
+
+
+
+
+
+
+

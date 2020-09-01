@@ -1,0 +1,54 @@
+Review Guide
+
+
+HOW TO PREPARE
+
+1) Review/Redo all of Test First from scratch.
+
+    TestFirst Part 1
+    TestFirst Part 2
+    TestFirst Review
+        Do not use your solutions unless you are completely stuck.
+
+
+2) Review/Redo Checkpoints 1 and 2 from scratch.
+
+CONCEPTS TO FOCUS ON:
+
+    * Higher Order Functions (TestFirst: 05,06)
+        Passing functions as values to other functions
+    
+    * Closure (TestFirst: 05)
+        Review the Once, Three(from the checkpoint), and the sometimes function from the new problem set.
+
+    * Objects
+        What is the difference between an internal prototype and the .prototype property on function objects?
+        How does the new keyword work?
+        What is Object.create? How can it be used?
+        Know how to set up an inheritance chain where multiple objects link to one another
+        Know how to place properties and methods on the .prototype object of a class and constructor function
+        Review 08_Classes - Know how to use Class syntax (you don't need to memorize it, 
+                    remember you can reference documentation on the checkpoint, 
+                    you can't reference practice problems or notes).
+
+    * Loops
+        Know how to loop over an object with a for/in loop
+        Have a clear understanding on how nested loops work
+        Object.hasOwnProperty - What is the function used for?
+        Object.keys - What is the return value? How would you use it?
+
+    * Functional Programming:
+        Review the implemention of reduce you created in TestFirst.
+        Understand how the following native JS Functions work(you created variations of these in 06_Functional-Programming):
+            Array.prototype.map
+            Array.prototype.filter
+            Array.prototype.reduce
+            Array.prototype.forEach
+    
+    * 'this'
+        Feel comfortable using the this keyword.
+        Have an understanding of how the context of this can change
+            It can change when:
+            A function is called with the new keyword.
+            A function is called with .call or .apply (know how to use these functions)
+            The call-site of the function (is the function using this called on an object or the global scope)
